@@ -1,0 +1,50 @@
+# Tuition Management System - Backend Implementation Walkthrough
+
+I have implemented the backend structure for the Tuition Management System, including Entities, Repositories, Services, and REST Controllers.
+
+## Key Features
+- **Entities**: Created [Student](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/Student.java#6-22), [Attendance](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/Attendance.java#7-21), [Report](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/Report.java#7-26), [ReportMarks](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/ReportMarks.java#6-39), and [Fees](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/Fees.java#7-24) in the `modal` package.
+- **Auto-Calculation**: Added logic in [ReportMarks](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/ReportMarks.java#6-39) to automatically calculate [Percentage](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/ReportMarks.java#19-38) and [Grade](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/ReportMarks.java#19-38) when data is saved or updated.
+- **REST APIs**: exposing CRUD endpoints for all entities.
+- **Project Structure**: Followed the existing package naming conventions (`modal`, `repo`, `service`, `controller`).
+
+## Components Implemented
+
+### 1. Entities (`com.safwan.tutionmanagement.modal`)
+- **[Student.java](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/Student.java)**: Contains student details including class and group.
+- **[Attendance.java](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/Attendance.java)**: Tracks student attendance.
+- **[Report.java](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/Report.java)**: Stores report metadata (Year, Month).
+- **[ReportMarks.java](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/ReportMarks.java)**: Stores subject marks with automatic grade logic.
+- **[Fees.java](file:///d:/safwan-learning/SpringBoot_TutionMS/tutionmanagement/src/main/java/com/safwan/tutionmanagement/modal/Fees.java)**: Manages fee records.
+
+### 2. Services & Repositories
+- Created Service classes in `com.safwan.tutionmanagement.service` to handle business logic.
+- Created Repository interfaces in `com.safwan.tutionmanagement.repo` extending `JpaRepository`.
+
+### 3. Controllers (`com.safwan.tutionmanagement.controller`)
+- Exposes endpoints like `/student/add`, `/student/all`, `/fees/add`, etc.
+- Enabled `CrossOrigin("*")` for easy frontend integration.
+
+## Usage Example
+To add a student, send a POST request to `/student/add` with the JSON body:
+```json
+{
+    "stdName": "Safwan",
+    "fatherName": "Father",
+    "phoneNo": "123456",
+    "className": "10",
+    "groupName": "Science",
+    "classesPerWeek": 5,
+    "paymentOption": "Advance"
+}
+```
+
+To add marks (which auto-calculates grade):
+```json
+{
+    "subjectName": "Math",
+    "maxMarks": 100,
+    "totalMarks": 95
+}
+```
+Result will include `"percentage": 95.0` and `"grade": "A+"`.
