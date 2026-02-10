@@ -22,8 +22,9 @@ public class ReportService {
         return reportRepository.findAll();
     }
 
-    public Optional<Report> getReportById(Long id) {
-        return reportRepository.findById(id);
+    public Report getReportById(Long id) {
+        return reportRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Report not found, id: " + id));
     }
 
     public void deleteReport(Long id) {

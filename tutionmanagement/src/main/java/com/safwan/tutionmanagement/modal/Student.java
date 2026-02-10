@@ -6,8 +6,7 @@ import lombok.Data;
 @Entity
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long stdId;
+    private String stdId;
     private String stdName;
     private String fatherName;
     private String phoneNo;
@@ -15,12 +14,23 @@ public class Student {
     private Integer classStudy;
     @Column(name = "group_name")
     private String groupName;
+    private Integer classesPerWeek;
+    private String paymentOption;
+    private Double monthlyFee;
 
-    public Long getStdId() {
+    public Double getMonthlyFee() {
+        return monthlyFee;
+    }
+
+    public void setMonthlyFee(Double monthlyFee) {
+        this.monthlyFee = monthlyFee;
+    }
+
+    public String getStdId() {
         return stdId;
     }
 
-    public void setStdId(Long stdId) {
+    public void setStdId(String stdId) {
         this.stdId = stdId;
     }
 
@@ -79,7 +89,4 @@ public class Student {
     public void setPaymentOption(String paymentOption) {
         this.paymentOption = paymentOption;
     }
-
-    private Integer classesPerWeek;
-    private String paymentOption;
 }

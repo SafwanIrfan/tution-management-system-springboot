@@ -5,7 +5,6 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Entity
-@Data
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,4 +16,36 @@ public class Attendance {
 
     private Integer isPresent; // 1 for present, 0 for absent
     private LocalDate date;
+
+    public Long getAttId() {
+        return attId;
+    }
+
+    public void setAttId(Long attId) {
+        this.attId = attId;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Integer getIsPresent() {
+        return isPresent;
+    }
+
+    public void setIsPresent(Integer isPresent) {
+        this.isPresent = isPresent;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 }

@@ -3,6 +3,7 @@ package com.safwan.tutionmanagement.controller;
 import com.safwan.tutionmanagement.modal.Report;
 import com.safwan.tutionmanagement.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +29,9 @@ public class ReportController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Report> getReportById(@PathVariable Long id) {
-        return reportService.getReportById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Report report = reportService.getReportById(id);
+        return new ResponseEntity<>(report, HttpStatus.OK);
+
     }
 
     @DeleteMapping("/delete/{id}")

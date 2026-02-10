@@ -22,11 +22,11 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> getStudentById(Long id) {
+    public Optional<Student> getStudentById(String id) {
         return studentRepository.findById(id);
     }
 
-    public void deleteStudent(Long id) {
+    public void deleteStudent(String id) {
         studentRepository.deleteById(id);
     }
 }

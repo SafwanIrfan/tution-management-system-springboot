@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
-    public Optional<List<Attendance>> findByDate(LocalDate date);
+    Optional<List<Attendance>> findByDate(LocalDate date);
 }
