@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,10 +18,19 @@ public class Report {
     private Student student;
 
     @OneToMany(mappedBy = "reportCard", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReportMarks> reportMarks;
+    private List<ReportMarks> reportMarks = new ArrayList<>();
     private String month;
     private LocalDate date;
     private String year;
+    private String examName;
+
+    public String getExamName() {
+        return examName;
+    }
+
+    public void setExamName(String examName) {
+        this.examName = examName;
+    }
 
     public String getMonth() {
         return month;

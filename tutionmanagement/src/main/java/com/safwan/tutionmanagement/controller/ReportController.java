@@ -1,5 +1,6 @@
 package com.safwan.tutionmanagement.controller;
 
+import com.safwan.tutionmanagement.modal.Attendance;
 import com.safwan.tutionmanagement.modal.Report;
 import com.safwan.tutionmanagement.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,13 @@ public class ReportController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Report> updateReport(@RequestBody Report report) {
-        return ResponseEntity.ok(reportService.saveReport(report));
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateReport(@PathVariable Long id, @RequestBody Report report) {
+        Report newAtt = reportService.updateReport(id, report);
+        if(newAtt != null){
+            return new ResponseEntity<>("Report Updated", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to update report", HttpStatus.BAD_REQUEST);
+        }
     }
 }

@@ -4,6 +4,7 @@ import com.safwan.tutionmanagement.modal.Report;
 import com.safwan.tutionmanagement.modal.ReportMarks;
 import com.safwan.tutionmanagement.repo.ReportMarksRepository;
 import com.safwan.tutionmanagement.repo.ReportRepository;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,19 +25,13 @@ public class ReportMarksService {
     @Autowired
     private ReportService reportService;
 
-    public String saveReportMarks(Long repId, ReportMarks[] reportMarks) {
+    public String saveReportMarks(Long repId, ReportMarks reportMarks) {
         Report report = reportService.getReportById(repId);
         if (report == null) {
             throw new RuntimeException("Report not found");
         }
-
-        for (ReportMarks repmark : reportMarks){
-            ReportMarks newRepMarks = new ReportMarks();
-            newRepMarks.setReportCard(report);
-            report.getReportMarks().add(repmark);
-        }
-
-        reportRepository.save(report);
+        reportMarks.setReportCard(report);
+        reportMarksRepository.save(reportMarks);
         return "Report Marks Saved.";
     }
 
@@ -57,5 +52,19 @@ public class ReportMarksService {
 
     public void deleteReportMarks(Long id) {
         reportMarksRepository.deleteById(id);
+    }
+
+    public @Nullable ReportMarks updateReportMarks(Long id, ReportMarks reportMarks) {
+        ReportMarks newRepMarks = getReportMarksById(id);
+        System.out.println(newRepMarks.getReportCard());
+
+        newRepMarks.setReportCard(reportMarks.getReportCard());
+        newRepMarks.setMaxMarks(reportMarks.getMaxMarks());
+        newRepMarks.setTotalMarks(reportMarks.getTotalMarks());
+        newRepMarks.setGrade(reportMarks.getGrade());
+        newRepMarks.setPercentage(reportMarks.getPercentage());
+        newRepMarks.setSubjectName(reportMarks.getSubjectName());
+
+        return reportMarksRepository.save(newRepMarks);
     }
 }

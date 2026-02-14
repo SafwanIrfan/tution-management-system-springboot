@@ -22,11 +22,23 @@ public class FeesService {
         return feesRepository.findAll();
     }
 
-    public Optional<Fees> getFeesById(Long id) {
-        return feesRepository.findById(id);
+    public Fees getFeesById(Long id) {
+        return feesRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Fees not found with id: " + id));
     }
 
     public void deleteFees(Long id) {
         feesRepository.deleteById(id);
+    }
+
+    public Fees updateFees(Long id, Fees fees) {
+        Fees newFees = getFeesById(id);
+        newFees.setAmount(fees.getAmount());
+        newFees.setDate(fees.getDate());
+        newFees.setMonth(fees.getMonth());
+        newFees.setStudent(fees.getStudent());
+        newFees.setPaymentMode(fees.getPaymentMode());
+
+        return feesRepository.save(newFees);
     }
 }

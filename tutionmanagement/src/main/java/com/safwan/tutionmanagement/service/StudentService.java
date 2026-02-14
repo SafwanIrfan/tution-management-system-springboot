@@ -3,6 +3,7 @@ package com.safwan.tutionmanagement.service;
 import com.safwan.tutionmanagement.modal.Student;
 import com.safwan.tutionmanagement.repo.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,11 +23,13 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> getStudentById(String id) {
-        return studentRepository.findById(id);
+    public Student getStudentById(String id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with this id: " +id));
     }
 
     public void deleteStudent(String id) {
         studentRepository.deleteById(id);
     }
+
 }

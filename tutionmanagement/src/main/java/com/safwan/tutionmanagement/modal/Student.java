@@ -11,7 +11,7 @@ public class Student {
     private String fatherName;
     private String phoneNo;
     @Column(name = "class_study")
-    private Integer classStudy;
+    private String classStudy;
     @Column(name = "group_name")
     private String groupName;
     private Integer classesPerWeek;
@@ -58,11 +58,11 @@ public class Student {
         this.phoneNo = phoneNo;
     }
 
-    public Integer getClassStudy() {
+    public String getClassStudy() {
         return classStudy;
     }
 
-    public void setClassStudy(Integer classStudy) {
+    public void setClassStudy(String classStudy) {
         this.classStudy = classStudy;
     }
 

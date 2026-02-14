@@ -13,8 +13,6 @@ public class Fees {
     @ManyToOne
     @JoinColumn(name = "stdId")
     private Student student;
-
-    private String issuedBy;
     private String month;
     private LocalDate date;
     private String paymentMode;
@@ -42,14 +40,6 @@ public class Fees {
 
     public void setStudent(Student student) {
         this.student = student;
-    }
-
-    public String getIssuedBy() {
-        return issuedBy;
-    }
-
-    public void setIssuedBy(String issuedBy) {
-        this.issuedBy = issuedBy;
     }
 
     public String getMonth() {

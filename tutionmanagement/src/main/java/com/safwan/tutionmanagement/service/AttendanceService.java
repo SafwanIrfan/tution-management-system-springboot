@@ -1,5 +1,6 @@
 package com.safwan.tutionmanagement.service;
 
+import com.safwan.tutionmanagement.dto.AttendanceDTO;
 import com.safwan.tutionmanagement.modal.Attendance;
 import com.safwan.tutionmanagement.modal.Student;
 import com.safwan.tutionmanagement.repo.AttendanceRepository;
@@ -52,5 +53,13 @@ public class AttendanceService {
 
     public void deleteAttendance(Long id) {
         attendanceRepository.deleteById(id);
+    }
+
+    public Integer getStudentPresentClassesByStdId(String id) {
+        return attendanceRepository.getStudentPresentClassesByStdId(id);
+    }
+
+    public List<AttendanceDTO> getStudentAttendanceByStdId(String id) {
+        return attendanceRepository.getStudentAttendanceByStdId(id);
     }
 }
